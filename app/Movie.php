@@ -16,7 +16,7 @@ class Movie extends Model
 	public $poster;
     
     public function ratings(){
-    	return $this->select()->orderBy('created_at','desc')->take(10)->get();
+    	return Rating::where('movie_id','=',$this->id)->orderBy('created_at','desc')->get();
     }
 
     public static function find($id){

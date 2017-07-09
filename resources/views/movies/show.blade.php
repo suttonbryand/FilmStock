@@ -40,7 +40,22 @@
 			<input type="Submit" class="btn btn-primary" value="Submit" />
 		</div>	
 		</form>
-	</div>	
+	</div>
+	<hr/>
+	@foreach($movie->ratings() as $rating)
+		<div class="media">
+		  <div class="media-left">
+		    <a href="#">
+		      <img class="media-object" src="..." alt="...">
+		    </a>
+		  </div>
+		  <div class="media-body">
+		    <h4 class="media-heading"> {{ $rating->user_id }}</h4>
+		    <h3>{{ $rating->score }}</h3>
+		    <h3>{{ $rating->comment }}</h3>
+		  </div>
+		</div>
+	@endforeach	
   </div>
 </div>
 
