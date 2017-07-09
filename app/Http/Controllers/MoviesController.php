@@ -49,9 +49,7 @@ class MoviesController extends Controller
      */
     public function show($id)
     {
-        $client = new Client();
-        $res = $client->request('GET', "movies.app/movies/$id");
-        return view('movies.show', ['movie' => json_decode($res->getBody())]);
+        return view('movies.show', ['movie' => \FilmStock\Movie::find($id)]);
     }
 
     /**
