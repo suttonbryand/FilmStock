@@ -15,9 +15,7 @@ class MoviesController extends Controller
      */
     public function index()
     {
-        $client = new Client();
-        $res = $client->request('GET', 'movies.app/movies');
-        return view('movies.index', ['movies' => json_decode($res->getBody(),true)]);
+        return view('movies.index', ['movies' => \FilmStock\Movie::all()]);
     }
 
     /**

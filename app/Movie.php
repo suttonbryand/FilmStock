@@ -33,4 +33,9 @@ class Movie extends Model
         return $movie;
     }
 
+    public static function all($columns = array()){
+        $client = new Client();
+        return json_decode($client->request('GET', 'movies.app/movies')->getBody());
+    }
+
 }

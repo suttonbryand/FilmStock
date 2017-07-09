@@ -41,7 +41,7 @@ class RatingsController extends Controller
         $rating->movie_id = $request->movie_id;
         $rating->save();
 
-        return redirect('/');
+        return redirect('/movies/' . $request->movie_id);
 
     }
 
