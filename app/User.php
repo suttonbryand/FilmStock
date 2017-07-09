@@ -30,4 +30,23 @@ class User extends Authenticatable
     public function ratings(){
         return $this->hasMany(Rating::class);
     }
+
+    public function friends(){
+        return $this->belongsToMany(User::class, 'friendships', 'user_id', 'friend_id');
+    }
+
+    public function add_friend($friend_id)
+    {
+        $this->friends()->attach($friend_id);   // add friend
+        $friend = User::find($friend_id);       // find your friend, and...
+        $friend->friends()->attach($this->id);  // add yourself, too
+    }
+    public function remove_friend($friend_id)
+    {
+        $this->friends()->detach($friend_id);   // remove friend
+        $friend = User::find($friend_id);       // find your friend, and...
+        $friend->friends()->detach($this->id);  // remove yourself, too
+    }
+
+
 }
