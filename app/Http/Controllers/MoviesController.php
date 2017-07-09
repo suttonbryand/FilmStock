@@ -17,7 +17,7 @@ class MoviesController extends Controller
     {
         $client = new Client();
         $res = $client->request('GET', 'movies.app/movies');
-        return view('movies/index', ['movies' => json_decode($res->getBody())]);
+        return view('movies/index', ['movies' => json_decode($res->getBody(),true)]);
     }
 
     /**
@@ -49,7 +49,9 @@ class MoviesController extends Controller
      */
     public function show($id)
     {
-        //
+        $client = new Client();
+        $res = $client->request('GET', "movies.app/movies/$id");
+        return view('movies/show', ['movie' => json_decode($res->getBody())]);
     }
 
     /**
