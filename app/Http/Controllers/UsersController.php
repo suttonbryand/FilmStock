@@ -3,6 +3,8 @@
 namespace FilmStock\Http\Controllers;
 
 use Illuminate\Http\Request;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 
 class UsersController extends Controller
 {
@@ -46,7 +48,13 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = \FilmStock\User::find(1);
-        return view('users.show',['user' => $user]);
+        $ratings = $user->ratings;
+        $client = new Client();
+        foreach($ratings as $rating){
+            $req = $client->request('GET', 'movies.app/movies/' . $rating['movie_id']);
+            $rating['movie'] = json_decode($req->getBody());
+        }
+        return view('users.show',['user' => $user, 'ratings' => $ratings]);
     }
 
     /**
