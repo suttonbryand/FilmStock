@@ -21,6 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('movies','MoviesController');
 
+Route::resource('users','UsersController');
+
 Route::get('/test', function(){
 	echo config('app.name',"Fail");
 });
