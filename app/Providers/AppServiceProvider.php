@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace FilmStock\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

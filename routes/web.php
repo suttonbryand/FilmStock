@@ -20,3 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('movies','MoviesController');
+
+Route::get('/test', function(){
+	echo config('app.name',"Fail");
+});
