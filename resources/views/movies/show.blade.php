@@ -43,14 +43,15 @@
 	</div>
 	<hr/>
 	@foreach($movie->ratings() as $rating)
+		{{ $user = FilmStock\User::find($rating->user_id) }}
 		<div class="media">
 		  <div class="media-left">
 		    <a href="#">
-		      <img class="media-object" src="..." alt="...">
+		      <img class="media-object" src=" {{ $user->makeGravatarLink() }}" alt="...">
 		    </a>
 		  </div>
 		  <div class="media-body">
-		    <h4 class="media-heading"> {{ $rating->user_id }}</h4>
+		    <h4 class="media-heading"> {{ $user->name }}</h4>
 		    <h3>{{ $rating->score }}</h3>
 		    <h3>{{ $rating->comment }}</h3>
 		  </div>

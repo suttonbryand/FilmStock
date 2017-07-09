@@ -4,8 +4,7 @@
 
 <div class="media">
   <div class="media-left">
-    <a href="#">
-    </a>
+    <img class="media-object index-image" src="{{ $user->gravatar_link }}" alt="Profile image here">
   </div>
   <div class="media-body">
     <h1 class="media-heading">{{ $user->name }}</h1>

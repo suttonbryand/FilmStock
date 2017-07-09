@@ -2,7 +2,7 @@
 
 @section('content')
 @foreach ($movies as $movie)
-	<a href="../movies/{{ $movie->id }}">
+	<a href="/movies/{{ $movie->id }}">
 		<div class="media">
 		  <div class="media-left">
 		  	<img class="media-object index-image" src="{{ \FilmStock\Movie::smallPoster() }}{{ $movie->poster_path }}" alt="{{ $movie->title }}">

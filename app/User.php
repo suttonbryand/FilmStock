@@ -28,7 +28,7 @@ class User extends Authenticatable
     ];
 
     public function ratings(){
-        return $this->hasMany(Rating::class);
+        return $this->hasMany(Rating::class)->orderBy('created_at','desc');
     }
 
     public function friends(){
@@ -46,6 +46,10 @@ class User extends Authenticatable
         $this->friends()->detach($friend_id);   // remove friend
         $friend = User::find($friend_id);       // find your friend, and...
         $friend->friends()->detach($this->id);  // remove yourself, too
+    }
+
+    public function makeGravatarLink(){
+        return "https://www.gravatar.com/avatar/" . md5(trim(strtolower($this->email)));
     }
 
 

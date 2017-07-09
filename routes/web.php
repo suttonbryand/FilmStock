@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::post('movies/search/', 'MoviesController@search');
+
 Route::resource('movies','MoviesController');
 
 Route::resource('users','UsersController');

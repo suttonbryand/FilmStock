@@ -5,6 +5,7 @@ namespace FilmStock\Http\Controllers;
 use Illuminate\Http\Request;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Input;
 
 class MoviesController extends Controller
 {
@@ -82,5 +83,9 @@ class MoviesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request){
+        return view('movies.index', ['movies' => \FilmStock\Movie::search(Input::get('query'))]);
     }
 }

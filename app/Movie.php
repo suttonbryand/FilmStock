@@ -48,6 +48,12 @@ class Movie extends Model
         return $res->results;
     }
 
+    public static function search($query){
+        $url = env('API_URL') . "search/multi?" . env('API_KEY') . "&language=en-US&query=" . urlencode($query);
+        $res = Movie::cache($url);
+        return Movie::extrapolateMovies($res->results);
+    }
+
     public static function largePoster(){
         return env('API_IMG') . env('IMG_LARGE');
     }
@@ -72,6 +78,25 @@ class Movie extends Model
 
     private static function makeCacheKey($url){
         return 'route_' . str_slug($url);
+    }
+
+    private static function extrapolateMovies($container){
+        $results = array();
+        foreach($container as $item){
+            if(property_exists($item,'media_type') && $item->media_type != "movie"){
+                if(property_exists($item,'known_for')){
+                    foreach($item->known_for as $i){
+                        if($i->media_type == "movie"){
+                            $results[] = $i;
+                        }
+                    }
+                }
+            }
+            else{
+                $results[] = $item;
+            }
+        }
+        return $results;
     }
 
 }

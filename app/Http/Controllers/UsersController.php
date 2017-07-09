@@ -47,7 +47,8 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = \FilmStock\User::find(1);
+        $user = \FilmStock\User::find($id);
+        $user->gravatar_link = $user->makeGravatarLink();
         $ratings = $user->ratings;
         $client = new Client();
         foreach($ratings as $rating){
