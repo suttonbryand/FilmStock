@@ -14,22 +14,25 @@ class Movie extends Model
 	public $title;
 	public $director;
 	public $overview;
-	public $poster;
+	public $poster_path_large;
     
     public function ratings(){
     	return Rating::where('movie_id','=',$this->id)->orderBy('created_at','desc')->get();
     }
 
     public static function find($id){
+        $url = env('API_URL') . "movie/$id?" . env('API_KEY'); 
+
     	$client = new Client();
-        $res = json_decode($client->request('GET', 'movies.app/movies/' . $id)->getBody());
+        $res = json_decode($client->request('GET', $url)->getBody());
 
         $movie = new Movie();
         $movie->id = $res->id;
         $movie->title = $res->title;
-        $movie->director = $res->director;
+        $movie->director = "";//$res->director;
         $movie->overview = $res->overview;
-        $movie->poster = $res->poster;
+        $movie->poster_path_large = Movie::largePoster() . $res->poster_path;
+        $movie->poster_path_small = Movie::smallPoster() . $res->poster_path;
 
         return $movie;
     }
@@ -44,6 +47,14 @@ class Movie extends Model
         $client = new Client();
         $res = json_decode($client->request('GET', $url)->getBody());
         return $res->results;
+    }
+
+    public static function largePoster(){
+        return env('API_IMG') . env('IMG_LARGE');
+    }
+
+    public static function smallPoster(){
+        return env('API_IMG') . env('IMG_SMALL');
     }
 
 }

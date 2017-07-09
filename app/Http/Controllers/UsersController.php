@@ -51,8 +51,7 @@ class UsersController extends Controller
         $ratings = $user->ratings;
         $client = new Client();
         foreach($ratings as $rating){
-            $req = $client->request('GET', 'movies.app/movies/' . $rating['movie_id']);
-            $rating['movie'] = json_decode($req->getBody());
+            $rating['movie'] = \FilmStock\Movie::find($rating['movie_id']);
         }
         return view('users.show',['user' => $user, 'ratings' => $ratings]);
     }

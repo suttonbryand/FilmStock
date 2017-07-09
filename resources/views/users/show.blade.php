@@ -15,17 +15,19 @@
 <h2>Ratings</h2>
 
 @foreach ($ratings as $rating)
-	<div class="media">
+	<a href="/movies/{{ $rating->movie->id }}">
+		<div class="media">
 		  <div class="media-left">
-		  	<img class="media-object index-image"  style="width:100px;" src="{{ $rating->movie->poster }}" alt="{{ $rating->movie->name }}">
+		  	<img class="media-object index-image" src="{{ $rating->movie->poster_path_small }}" alt="{{ $rating->movie->title }}">
 		  </div>
 		  <div class="media-body">
-		    <h4 class="media-heading">{{ $rating->movie->name }}</h4>
-		    <p>{{ $rating->movie->summary }}</p>
+		    <h4 class="media-heading">{{ $rating->movie->title }}</h4>
+		    <p>{{ $rating->movie->overview }}</p>
 		    <p>{{ $rating->comment }}</p>
-		    <p>Rating: {{ $rating->score}}</p>
+		    <p>Rating: {{ $rating->score }}</p>
 		  </div>
 		</div>
+	</a>
 @endforeach
 
 @endsection

@@ -5,13 +5,13 @@
 <div class="media">
   <div class="media-left">
     <a href="#">
-      <img class="media-object" style="width: 300px;" src="{{ $movie->poster }}" alt="{{ $movie->name }}">
+      <img class="media-object" src="{{ $movie->poster_path_large }}" alt="{{ $movie->title }}">
     </a>
   </div>
   <div class="media-body">
-    <h1 class="media-heading">{{ $movie->name }}</h1>
-    <h3>Director: {{ $movie->director }}</h3>
-	<p>{{ $movie->summary }}</p>
+    <h1 class="media-heading">{{ $movie->title }}</h1>
+    <h3>Director: </h3>
+	<p>{{ $movie->overview }}</p>
 	<div class="container-fluid form-group">
 		<form method="POST" action="/ratings">
 			{{ csrf_field() }}

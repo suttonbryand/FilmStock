@@ -5,7 +5,7 @@
 	<a href="../movies/{{ $movie->id }}">
 		<div class="media">
 		  <div class="media-left">
-		  	<img class="media-object index-image"  style="width:100px;" src="" alt="{{ $movie->title }}">
+		  	<img class="media-object index-image" src="{{ \FilmStock\Movie::smallPoster() }}{{ $movie->poster_path }}" alt="{{ $movie->title }}">
 		  </div>
 		  <div class="media-body">
 		    <h4 class="media-heading">{{ $movie->title }}</h4>
