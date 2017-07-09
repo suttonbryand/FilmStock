@@ -9,10 +9,13 @@ use GuzzleHttp\Client;
 
 class Movie extends Model
 {
+
+    const API_KEY="api_key=a245bed8673f24615c5f91f548106300";
+    const API_URL="https://api.themoviedb.org/3/";
 	public $id;
-	public $name;
+	public $title;
 	public $director;
-	public $summary;
+	public $overview;
 	public $poster;
     
     public function ratings(){
@@ -25,9 +28,9 @@ class Movie extends Model
 
         $movie = new Movie();
         $movie->id = $res->id;
-        $movie->name = $res->name;
+        $movie->title = $res->title;
         $movie->director = $res->director;
-        $movie->summary = $res->summary;
+        $movie->overview = $res->overview;
         $movie->poster = $res->poster;
 
         return $movie;
@@ -36,6 +39,13 @@ class Movie extends Model
     public static function all($columns = array()){
         $client = new Client();
         return json_decode($client->request('GET', 'movies.app/movies')->getBody());
+    }
+
+    public static function latestReleases($daysBack = 30){
+        $url = env('API_URL', Movie::API_URL) . "discover/movie?primary_release_date.gte=" . date("Y-m-d", strtotime("-$daysBack days")) . "&primary_release_date.lte=" . date("Y-m-d") . "&sort_by=popularity.desc&" . env('API_KEY', Movie::API_KEY);
+        $client = new Client();
+        $res = json_decode($client->request('GET', $url)->getBody());
+        return $res->results;
     }
 
 }

@@ -5,11 +5,11 @@
 	<a href="../movies/{{ $movie->id }}">
 		<div class="media">
 		  <div class="media-left">
-		  	<img class="media-object index-image"  style="width:100px;" src="{{ $movie->poster }}" alt="{{ $movie->name }}">
+		  	<img class="media-object index-image"  style="width:100px;" src="" alt="{{ $movie->title }}">
 		  </div>
 		  <div class="media-body">
-		    <h4 class="media-heading">{{ $movie->name }}</h4>
-		    <p>{{ $movie->summary }}</p>
+		    <h4 class="media-heading">{{ $movie->title }}</h4>
+		    <p>{{ $movie->overview }}</p>
 		  </div>
 		</div>
 	</a>

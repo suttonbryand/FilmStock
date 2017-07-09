@@ -15,7 +15,7 @@ class MoviesController extends Controller
      */
     public function index()
     {
-        return view('movies.index', ['movies' => \FilmStock\Movie::all()]);
+        return view('movies.index', ['movies' => \FilmStock\Movie::latestReleases()]);
     }
 
     /**
