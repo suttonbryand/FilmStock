@@ -10,8 +10,6 @@ use GuzzleHttp\Client;
 class Movie extends Model
 {
 
-    const API_KEY="api_key=a245bed8673f24615c5f91f548106300";
-    const API_URL="https://api.themoviedb.org/3/";
 	public $id;
 	public $title;
 	public $director;
@@ -42,7 +40,7 @@ class Movie extends Model
     }
 
     public static function latestReleases($daysBack = 30){
-        $url = env('API_URL', Movie::API_URL) . "discover/movie?primary_release_date.gte=" . date("Y-m-d", strtotime("-$daysBack days")) . "&primary_release_date.lte=" . date("Y-m-d") . "&sort_by=popularity.desc&" . env('API_KEY', Movie::API_KEY);
+        $url = env('API_URL') . "discover/movie?primary_release_date.gte=" . date("Y-m-d", strtotime("-$daysBack days")) . "&primary_release_date.lte=" . date("Y-m-d") . "&sort_by=popularity.desc&" . env('API_KEY');
         $client = new Client();
         $res = json_decode($client->request('GET', $url)->getBody());
         return $res->results;
