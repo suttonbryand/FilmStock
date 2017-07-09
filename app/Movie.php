@@ -5,6 +5,7 @@ namespace FilmStock;
 use Illuminate\Database\Eloquent\Model;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Cache;
 
 
 class Movie extends Model
@@ -23,8 +24,7 @@ class Movie extends Model
     public static function find($id){
         $url = env('API_URL') . "movie/$id?" . env('API_KEY'); 
 
-    	$client = new Client();
-        $res = json_decode($client->request('GET', $url)->getBody());
+    	$res = Movie::cache($url);
 
         $movie = new Movie();
         $movie->id = $res->id;
@@ -44,8 +44,7 @@ class Movie extends Model
 
     public static function latestReleases($daysBack = 30){
         $url = env('API_URL') . "discover/movie?primary_release_date.gte=" . date("Y-m-d", strtotime("-$daysBack days")) . "&primary_release_date.lte=" . date("Y-m-d") . "&sort_by=popularity.desc&" . env('API_KEY');
-        $client = new Client();
-        $res = json_decode($client->request('GET', $url)->getBody());
+        $res = Movie::cache($url);
         return $res->results;
     }
 
@@ -55,6 +54,24 @@ class Movie extends Model
 
     public static function smallPoster(){
         return env('API_IMG') . env('IMG_SMALL');
+    }
+
+    private static function cache($url){
+        $key = Movie::makeCacheKey($url);
+
+        if (Cache::has($key)) {
+            return (Cache::get($key));
+        }
+        else{
+            $client = new Client();
+            $response = json_decode($client->request('GET', $url)->getBody());
+            Cache::put($key, $response, 360);
+            return $response;
+        }
+    }
+
+    private static function makeCacheKey($url){
+        return 'route_' . str_slug($url);
     }
 
 }
