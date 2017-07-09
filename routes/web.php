@@ -23,6 +23,8 @@ Route::resource('movies','MoviesController');
 
 Route::resource('users','UsersController');
 
+Route::resource('ratings','RatingsController');
+
 Route::get('/test', function(){
 	echo config('app.name',"Fail");
 });
