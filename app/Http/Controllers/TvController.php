@@ -4,7 +4,7 @@ namespace FilmStock\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class RatingsController extends Controller
+class TvController extends MoviesController
 {
     /**
      * Display a listing of the resource.
@@ -34,30 +34,7 @@ class RatingsController extends Controller
      */
     public function store(Request $request)
     {
-
-    }
-
-    public function store_tv(Request $request){
-        $rating = $this->store_helper($request);
-        $rating->media_type = \FilmStock\Movie::URL_TV;
-        $rating->save();
-        return redirect('/tv/' . $request->movie_id);        
-    }
-
-    public function store_movie(Request $request){
-        $rating = $this->store_helper($request);
-        $rating->media_type = \FilmStock\Movie::URL_MOVIE;
-        $rating->save();
-        return redirect('/movie/' . $request->movie_id); 
-    }
-
-    private function store_helper(Request $request){
-        $rating = new \FilmStock\Rating();
-        $rating->comment  = $request->comment;
-        $rating->score    = $request->score;
-        $rating->user_id  = \Auth::user()->id;
-        $rating->movie_id = $request->movie_id;
-        return $rating;
+        //
     }
 
     /**
@@ -68,7 +45,7 @@ class RatingsController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('movies.show', ['movie' => \FilmStock\Tv::find($id)]);
     }
 
     /**

@@ -53,7 +53,7 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                      <li>
-                                        <a href="/users/{{ Auth::user()->id }}">
+                                        <a href="/user/{{ Auth::user()->id }}">
                                             Profile
                                         </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

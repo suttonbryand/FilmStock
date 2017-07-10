@@ -5,15 +5,15 @@
 <div class="media">
   <div class="media-left">
     <a href="#">
-      <img class="media-object" src="{{ $movie->poster_path_large }}" alt="{{ $movie->title }}">
+      <img class="media-object" src="{{ $movie->poster_path_large }}" alt="{{ FilmStock\Movie::getTitle($movie) }}">
     </a>
   </div>
   <div class="media-body">
-    <h1 class="media-heading">{{ $movie->title }}</h1>
+    <h1 class="media-heading">{{ FilmStock\Movie::getTitle($movie) }}</h1>
     <h3>Director: </h3>
 	<p>{{ $movie->overview }}</p>
 	<div class="container-fluid form-group">
-		<form method="POST" action="/ratings">
+		<form method="POST" action="/rating/{{ $movie->media_type }}">
 			{{ csrf_field() }}
 			<input type="hidden" name="movie_id" value="{{ $movie->id }}" />
 			<h2 class="row">Rate Movie</h2>

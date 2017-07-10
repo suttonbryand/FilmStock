@@ -19,13 +19,19 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('movies/search/', 'MoviesController@search');
+Route::post('movie/search/', 'MoviesController@search');
 
-Route::resource('movies','MoviesController');
+Route::resource('movie','MoviesController');
 
-Route::resource('users','UsersController');
+Route::resource('tv','TvController');
 
-Route::resource('ratings','RatingsController');
+Route::resource('user','UsersController');
+
+Route::post('rating/tv', 'RatingsController@store_tv');
+
+Route::post('rating/movie', 'RatingsController@store_movie');
+
+Route::resource('rating','RatingsController');
 
 Route::get('/test', function(){
 	echo config('app.name',"Fail");

@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-lg-3"></div>
                     <div class="col-lg-6">
-                        <form method="POST" action="/movies/search/">
+                        <form method="POST" action="/movie/search/">
                             {{ csrf_field() }}
                             <div class="input-group">
                                 <input type="text" class="form-control" name="query" placeholder="Search for...">
@@ -28,7 +28,7 @@
                 <div class="row links">
                     <div class="col-md-5"></div>
                     <div class="col-md-3">
-                        <a href="movies/">Movies</a>
+                        <a href="/movie">Movies</a>
                         <a href="https://laracasts.com">Laracasts</a>
                         <a href="https://laravel-news.com">News</a>
                         <a href="https://forge.laravel.com">Forge</a>
