@@ -19,6 +19,7 @@ class Movie extends Model
 
     const URL_TV = "tv";
     const URL_MOVIE = "movie";
+    const URL_EPISODE = "episode";
     
     public function ratings(){
     	return Rating::where('movie_id','=',$this->id)->orderBy('created_at','desc')->get();
@@ -30,24 +31,34 @@ class Movie extends Model
     	return Movie::find_helper($url);
     }
 
-    protected static function find_helper($url, $tv = false){
+    protected static function find_helper($url, $media_type = Movie::URL_MOVIE){
         $res = Movie::cache($url);
 
         $movie = new Movie();
         $movie->id = $res->id;
-        if($tv){
-            $movie->title = $res->name;
-            $movie->media_type = MOVIE::URL_TV;
-            $movie->number_of_seasons = $res->number_of_seasons;
+        switch($media_type){
+            case Movie::URL_MOVIE:
+                $movie->title = $res->title;
+                $movie->media_type = MOVIE::URL_MOVIE;
+                $img = $res->poster_path;
+                break;
+            case Movie::URL_TV:
+                $movie->title = $res->name;
+                $movie->media_type = MOVIE::URL_TV;
+                $movie->number_of_seasons = $res->number_of_seasons;
+                $img = $res->poster_path;
+                break;
+            case Movie::URL_EPISODE:
+                $movie->title = $res->name;
+                $movie->media_type = MOVIE::URL_EPISODE;
+                $img = $res->still_path;
+                break;
         }
-        else{
-            $movie->title = $res->title;
-            $movie->media_type = MOVIE::URL_MOVIE;
-        }
+
         $movie->director = "";//$res->director;
         $movie->overview = $res->overview;
-        $movie->poster_path_large = Movie::largePoster() . $res->poster_path;
-        $movie->poster_path_small = Movie::smallPoster() . $res->poster_path;
+        $movie->poster_path_large = Movie::largePoster() . $img;
+        $movie->poster_path_small = Movie::smallPoster() . $img;
 
         return $movie;
     }

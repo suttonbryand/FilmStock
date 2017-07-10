@@ -4,7 +4,7 @@ namespace FilmStock\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TvController extends MoviesController
+class EpisodesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class TvController extends MoviesController
      */
     public function index()
     {
-        return view('movies.index', ['movies' => \FilmStock\Tv::latestReleases()]);
+        //
     }
 
     /**
@@ -43,12 +43,10 @@ class TvController extends MoviesController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($tv_id,$season_number,$episode_number)
     {
-        $tv = \FilmStock\Tv::find($id);
-        $number_of_seasons = $tv->number_of_seasons;
-        $season = \FilmStock\Episode::getSeason($id,$number_of_seasons);
-        return view('tv.show', ['movie' => $tv, 'season' => $season]);
+        $episode = \FilmStock\Episode::findEpisode($tv_id,$season_number,$episode_number);
+        return view('episodes.show', ['movie' => $episode]);
     }
 
     /**
