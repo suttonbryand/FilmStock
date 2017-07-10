@@ -52,7 +52,12 @@ class UsersController extends Controller
         $ratings = $user->ratings;
         $client = new Client();
         foreach($ratings as $rating){
-            $rating['movie'] = \FilmStock\Movie::find($rating['movie_id']);
+            if($rating['media_type'] == \FilmStock\Movie::URL_TV){
+                $rating['movie'] = \FilmStock\Tv::find($rating['movie_id']);
+            }
+            else{
+                $rating['movie'] = \FilmStock\Movie::find($rating['movie_id']);
+            }
         }
         return view('users.show',['user' => $user, 'ratings' => $ratings]);
     }

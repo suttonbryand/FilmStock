@@ -58,6 +58,10 @@ class Movie extends Model
 
     public static function latestReleases($daysBack = 30){
         $url = env('API_URL') . "discover/movie?primary_release_date.gte=" . date("Y-m-d", strtotime("-$daysBack days")) . "&primary_release_date.lte=" . date("Y-m-d") . "&sort_by=popularity.desc&" . env('API_KEY');
+        return Movie::latestReleases_helper($url);
+    }
+
+    protected static function latestReleases_helper($url){
         $res = Movie::cache($url);     
         return $res->results;
     }

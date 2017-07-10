@@ -13,7 +13,7 @@ class TvController extends MoviesController
      */
     public function index()
     {
-        //
+        return view('movies.index', ['movies' => \FilmStock\Tv::latestReleases()]);
     }
 
     /**

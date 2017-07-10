@@ -25,6 +25,22 @@
                     <div class="col-lg-3"></div>                  
                 </div><!-- /.row -->
 
+                </br>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3" style="text-align: right;">
+                        <form method="GET" action="/movie"> 
+                            <input type="submit" class="btn btn-primary" value="Popular Movies" />
+                        </form>
+                    </div>
+                    <div class="col-md-3">
+                        <form method="GET" action="/tv"> 
+                            <input type="submit" class="btn btn-primary" value="Popular TV" />
+                        </form>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+
                 <div class="row links">
                     <div class="col-md-5"></div>
                     <div class="col-md-3">
