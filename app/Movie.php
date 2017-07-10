@@ -28,31 +28,35 @@ class Movie extends Model
     public static function find($id){
         $url = env('API_URL') . "movie/$id?" . env('API_KEY'); 
 
-    	return Movie::find_helper($url);
+    	$movie = Movie::find_helper($url);
+
+        $movie->media_type = MOVIE::URL_MOVIE;
+
+        return $movie;
     }
 
-    protected static function find_helper($url, $media_type = Movie::URL_MOVIE){
+    protected static function find_helper($url){
         $res = Movie::cache($url);
 
         $movie = new Movie();
         $movie->id = $res->id;
-        switch($media_type){
-            case Movie::URL_MOVIE:
-                $movie->title = $res->title;
-                $movie->media_type = MOVIE::URL_MOVIE;
-                $img = $res->poster_path;
-                break;
-            case Movie::URL_TV:
-                $movie->title = $res->name;
-                $movie->media_type = MOVIE::URL_TV;
-                $movie->number_of_seasons = $res->number_of_seasons;
-                $img = $res->poster_path;
-                break;
-            case Movie::URL_EPISODE:
-                $movie->title = $res->name;
-                $movie->media_type = MOVIE::URL_EPISODE;
-                $img = $res->still_path;
-                break;
+
+        if(property_exists($res, 'still_path')){
+            $img = $res->still_path; 
+        }
+        else{
+            $img = $res->poster_path;
+        }
+
+        if(property_exists($res, 'name')){
+            $movie->title = $res->name;
+        }
+        else{
+            $movie->title = $res->title;
+        }
+
+        if(property_exists($res,'number_of_seasons')){
+            $movie->number_of_seasons = $res->number_of_seasons;
         }
 
         $movie->director = "";//$res->director;

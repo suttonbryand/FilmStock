@@ -9,8 +9,11 @@ class Tv extends Movie
 
     public static function find($id){
         $url = env('API_URL') . "tv/$id?" . env('API_KEY'); 
+    	$movie = Movie::find_helper($url,Movie::URL_TV);
 
-    	return Movie::find_helper($url,Movie::URL_TV);
+		$movie->media_type = MOVIE::URL_TV;
+
+		return $movie;
     }
 
     public static function latestReleases($daysBack = 30){
