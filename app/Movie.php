@@ -38,6 +38,7 @@ class Movie extends Model
         if($tv){
             $movie->title = $res->name;
             $movie->media_type = MOVIE::URL_TV;
+            $movie->number_of_seasons = $res->number_of_seasons;
         }
         else{
             $movie->title = $res->title;
@@ -90,7 +91,7 @@ class Movie extends Model
         return Movie::mediaType_tv($item) ? Movie::URL_TV : Movie::URL_MOVIE;
     }
 
-    private static function cache($url){
+    protected static function cache($url){
         $key = Movie::makeCacheKey($url);
 
         if (Cache::has($key)) {
