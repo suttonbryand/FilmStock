@@ -51,6 +51,16 @@ class RatingsController extends Controller
         return redirect('/movie/' . $request->movie_id); 
     }
 
+    public function store_episode(Request $request){
+        $rating = $this->store_helper($request);
+        $rating->media_type = \FilmStock\Movie::URL_EPISODE;
+        $rating->season_number = $request->season_number;
+        $rating->episode_number = $request->episode_number;
+        $rating->tv_id = $request->tv_id;
+        $rating->movie_id = $request->episode_id;
+        $rating->save();
+    }
+
     private function store_helper(Request $request){
         $rating = new \FilmStock\Rating();
         $rating->comment  = $request->comment;

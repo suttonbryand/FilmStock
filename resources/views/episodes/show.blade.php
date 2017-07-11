@@ -2,9 +2,12 @@
 
 @section('rating-form')
 	<div class="container-fluid form-group">
-		<form method="POST" action="/rating/movie">
+		<form method="POST" action="/rating/episode">
 			{{ csrf_field() }}
-			<input type="hidden" name="movie_id" value="{{ $movie->id }}" />
+			<input type="hidden" name="season_number" value="{{ $movie->season_number }}" />
+			<input type="hidden" name="episode_number" value="{{ $movie->episode_number }}" />
+			<input type="hidden" name="episode_id" value="{{ $movie->id }}" />
+			<input type="hidden" name="tv_id" value="{{ $movie->tv_id}}" />
 			<h2 class="row">Rate Movie</h2>
 			<div class="row">
 				<div class="col-md-1">Rating:</div>

@@ -106,6 +106,18 @@ class Movie extends Model
         return Movie::mediaType_tv($item) ? Movie::URL_TV : Movie::URL_MOVIE;
     }
 
+    public static function makeURL($movie){
+        switch($movie->media_type){
+            case Movie::URL_MOVIE:
+            case Movie::URL_TV:
+                return "$/movie->media_type/$movie->id";
+                break;
+            case Movie::URL_EPISODE:
+                return "/tv/$movie->tv_id/season/$movie->season_number/episode/$movie->episode_number";
+                break;
+        }
+    }
+
     protected static function cache($url){
         $key = Movie::makeCacheKey($url);
 

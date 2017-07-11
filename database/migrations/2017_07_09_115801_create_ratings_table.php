@@ -25,6 +25,11 @@ class CreateRatingsTable extends Migration
 
             $table->string('media_type');
 
+            // For episode ratings
+            $table->integer('episode_number')->nullable();
+            $table->integer('season_number')->nullable();
+            $table->integer('tv_id')->nullable();
+
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
