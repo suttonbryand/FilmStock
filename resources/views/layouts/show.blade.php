@@ -48,28 +48,8 @@
 
     @yield('episodes')
 
-	@foreach($movie->ratings() as $rating)
-		<?php $user = FilmStock\User::find($rating->user_id) ?>
-		<div class="media">
-		  <div class="media-left">
-		    <a href="#">
-		      <img class="media-object" src=" {{ $user->makeGravatarLink() }}" alt="...">
-		    </a>
-		  </div>
-		  <div class="media-body">
-		    <h4 class="media-heading"> {{ $user->name }}</h4>
-		    <h3>{{ $rating->score }}</h3>
-		    <h3>{{ $rating->comment }}</h3>
-		    <div>
-		    	<form action="/rating/comment" method="POST">
-		    		{{ csrf_field() }}
-		    		<input class="btn btn-primary" type="submit" name="submission" value="Like" />
-		    		<input class="btn btn-primary" type="submit" name="submission" value="Comment" />
-		    	</form>
-		    </div>
-		  </div>
-		</div>
-	@endforeach	
+    @include('shared.ratings', ['ratings' => $ratings, 'is_user_page' => false]);)
+
   </div>
 </div>
 

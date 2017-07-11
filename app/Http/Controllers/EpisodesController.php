@@ -46,7 +46,7 @@ class EpisodesController extends Controller
     public function show($tv_id,$season_number,$episode_number)
     {
         $episode = \FilmStock\Episode::findEpisode($tv_id,$season_number,$episode_number);
-        return view('episodes.show', ['movie' => $episode]);
+        return view('episodes.show', ['movie' => $episode, 'ratings' => $episode->ratings()]);
     }
 
     /**

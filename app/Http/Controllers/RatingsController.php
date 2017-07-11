@@ -56,7 +56,16 @@ class RatingsController extends Controller
     }
 
     public function comment(Request $request){
-        dd($request);
+        if($request->submission == "Like"){
+            return $this->like($request);
+        }
+        $comment = \FilmStock\Comment::create($request);
+        return back();
+    }
+
+    private function like(Request $request){
+        $comment = \FilmStock\Like::create($request);
+        return back();
     }
 
 
