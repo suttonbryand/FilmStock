@@ -107,7 +107,17 @@ class Movie extends Model
     }
 
     public static function makeURL($movie){
-        switch($movie->media_type){
+        if(property_exists($movie, 'media_type')){
+            $media_type = $movie_media_type;
+        }
+        elseif (property_exists($movie, 'name')) {
+            $media_type = Movie::URL_TV;
+        }
+        else{
+            $media_type = Movie::URL_MOVIE;
+        }
+
+        switch($media_type){
             case Movie::URL_MOVIE:
             case Movie::URL_TV:
                 return "$/movie->media_type/$movie->id";
