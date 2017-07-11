@@ -37,6 +37,8 @@ Route::post('/rating/movie', 'RatingsController@store_movie');
 
 Route::post('/rating/episode', 'RatingsController@store_episode');
 
+Route::post('/rating/comment', 'RatingsController@comment');
+
 Route::resource('/rating','RatingsController');
 
 Route::get('/test', function(){

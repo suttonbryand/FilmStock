@@ -108,7 +108,7 @@ class Movie extends Model
 
     public static function makeURL($movie){
         if(property_exists($movie, 'media_type')){
-            $media_type = $movie_media_type;
+            $media_type = $movie->media_type;
         }
         elseif (property_exists($movie, 'name')) {
             $media_type = Movie::URL_TV;
@@ -120,10 +120,10 @@ class Movie extends Model
         switch($media_type){
             case Movie::URL_MOVIE:
             case Movie::URL_TV:
-                return "$/movie->media_type/$movie->id";
+                return "$media_type/$movie->id";
                 break;
             case Movie::URL_EPISODE:
-                return "/tv/$movie->tv_id/season/$movie->season_number/episode/$movie->episode_number";
+                return "tv/$movie->tv_id/season/$movie->season_number/episode/$movie->episode_number";
                 break;
         }
     }

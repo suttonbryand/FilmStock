@@ -38,37 +38,27 @@ class RatingsController extends Controller
     }
 
     public function store_tv(Request $request){
-        $rating = $this->store_helper($request);
         $rating->media_type = \FilmStock\Movie::URL_TV;
-        $rating->save();
+        $rating = \FilmStock\Rating::create($request);
         return redirect('/tv/' . $request->movie_id);        
     }
 
     public function store_movie(Request $request){
-        $rating = $this->store_helper($request);
-        $rating->media_type = \FilmStock\Movie::URL_MOVIE;
-        $rating->save();
+        $request->media_type = \FilmStock\Movie::URL_MOVIE;
+        $rating = \FilmStock\Rating::create($request);
         return redirect('/movie/' . $request->movie_id); 
     }
 
     public function store_episode(Request $request){
-        $rating = $this->store_helper($request);
-        $rating->media_type = \FilmStock\Movie::URL_EPISODE;
-        $rating->season_number = $request->season_number;
-        $rating->episode_number = $request->episode_number;
-        $rating->tv_id = $request->tv_id;
-        $rating->movie_id = $request->episode_id;
-        $rating->save();
+        $request->media_type = \FilmStock\Movie::URL_EPISODE;
+        $rating = \FilmStock\Rating::create($request);
+        return redirect('/tv/' . $request->tv_id . '/season/' . $request->season_number . '/episode/' . $request->episode_number);
     }
 
-    private function store_helper(Request $request){
-        $rating = new \FilmStock\Rating();
-        $rating->comment  = $request->comment;
-        $rating->score    = $request->score;
-        $rating->user_id  = \Auth::user()->id;
-        $rating->movie_id = $request->movie_id;
-        return $rating;
+    public function comment(Request $request){
+        dd($request);
     }
+
 
     /**
      * Display the specified resource.
