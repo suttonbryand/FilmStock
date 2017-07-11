@@ -33,5 +33,13 @@ class Rating extends Model
                 return $this->belongsTo('FilmStock\User');
         }
 
+        public function likes(){
+                return $this->hasMany('FilmStock\Like');
+        }
+
+        public function comments(){
+                return $this->belongsTo('FilmStock\Comment');
+        }
+
 
 }

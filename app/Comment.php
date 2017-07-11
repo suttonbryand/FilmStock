@@ -24,5 +24,9 @@ class Comment extends Model
     	return $comment;
     }
 
+    public function user(){
+    	return $this->belongsTo('FilmStock\User');
+    }    
+
 
 }

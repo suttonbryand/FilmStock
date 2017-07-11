@@ -10,9 +10,15 @@
 		    <h3>{{ $rating->score }}</h3>
 		    <h3>{{ $rating->comment }}</h3>
 		    <div>
+		    <div>
+		    	@foreach($rating->likes as $like)
+		    		<span>{{ $like->user->name }}</span>
+		    	@endforeach
+		    </div>
 		    	<form action="/rating/comment" method="POST">
 		    		{{ csrf_field() }}
 		    		<input type="hidden" name="rating_id" value="{{ $rating->id }}" />
+		    		<textarea class="form-control row" rows="1" name="text"></textarea>
 		    		<input class="btn btn-primary" type="submit" name="submission" value="Like" />
 		    		<input class="btn btn-primary" type="submit" name="submission" value="Comment" />
 		    	</form>

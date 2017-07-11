@@ -4,7 +4,7 @@ namespace FilmStock;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Like extends Model
+class Like extends Comment
 {
     public static function create($attributes){
     	$like = new Like();
@@ -14,4 +14,5 @@ class Like extends Model
     	$like->save();
     	return $like;
     }
+
 }
