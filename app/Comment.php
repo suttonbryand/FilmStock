@@ -40,6 +40,10 @@ class Comment extends Model
 
     public function rating(){
     	return $this->belongsTo(\FilmStock\Rating::class);
+    }
+
+    public function likes(){
+        return $this->hasMany(\FilmStock\Like::class);
     } 
 
     private function addEpisodeAttributes($attributes){

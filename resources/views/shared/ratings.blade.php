@@ -10,11 +10,9 @@
 		    <h3>{{ $comment->rating->score }}</h3>
 		    <h3>{{ $comment->body }}</h3>
 		    <div>
-		    	{{--
 		    	@foreach($comment->likes as $like)
 		    		<span>{{ $like->user->name }}</span>
 		    	@endforeach
-		    	--}}
 		    </div>
 		    	<form action="/rating/comment" method="POST">
 		    		{{ csrf_field() }}
