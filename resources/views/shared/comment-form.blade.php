@@ -1,5 +1,13 @@
-		    		<textarea class="form-control row" rows="1" name="body"></textarea>
+		    		@if(isset($for_comment))
+		    			<textarea class="form-control row" rows="1" name="body"></textarea>
+		    		@endif
+		    		
 		    		<div style="margin-top:30px;">
-			    		<input class="btn btn-primary" type="submit" name="submission" value="Like" />
-			    		<input class="btn btn-primary" type="submit" name="submission" value="Comment" />
+		    			@if (isset($for_like))
+			    			<input class="btn btn-primary" type="submit" name="submission" value="Like" />
+			    		@endif
+
+			    		@if (isset($for_comment))
+			    			<input class="btn btn-primary" type="submit" name="submission" value="Comment" />
+			    		@endif
 			    	</div>

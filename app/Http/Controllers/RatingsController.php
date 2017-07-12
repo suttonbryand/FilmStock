@@ -38,18 +38,21 @@ class RatingsController extends Controller
     }
 
     public function store_tv(Request $request){
+        $this->validation($request);
         $rating = \FilmStock\Rating::create($request);
         $rating->media_type = \FilmStock\Movie::URL_TV;
         return redirect('/tv/' . $request->movie_id);        
     }
 
     public function store_movie(Request $request){
+        $this->validation($request);
         $request->media_type = \FilmStock\Movie::URL_MOVIE;
         $rating = \FilmStock\Rating::create($request);
         return redirect('/movie/' . $request->movie_id); 
     }
 
     public function store_episode(Request $request){
+        $this->validation($request);
         $request->media_type = \FilmStock\Movie::URL_EPISODE;
         $rating = \FilmStock\Rating::create($request);
         return redirect('/tv/' . $request->tv_id . '/season/' . $request->season_number . '/episode/' . $request->episode_number);
@@ -66,6 +69,12 @@ class RatingsController extends Controller
     private function like(Request $request){
         $comment = \FilmStock\Like::create($request);
         return back();
+    }
+
+    private function validation(Request $request){
+        $this->validate($request, [
+            'score' => 'required'
+            ]);
     }
 
 

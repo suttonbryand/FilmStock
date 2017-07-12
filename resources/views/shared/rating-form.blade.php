@@ -22,6 +22,6 @@
 				</div>
 			</div>
 			<h3 class="row">Add a Comment</h3>
-			@include('shared.comment-form')	
+			@include('shared.comment-form', ['for_comment' => true])	
 		</form>
 	</div>

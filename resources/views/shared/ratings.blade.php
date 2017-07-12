@@ -1,25 +1,13 @@
 	@foreach($rating_comments as $comment)
-		<div class="media">
-		  <div class="media-left">
-		    <a href="#">
-		      <img class="media-object" src=" {{ $is_user_page ? $comment->movie->poster_path_small : $comment->user->makeGravatarLink() }}" alt="...">
-		    </a>
-		  </div>
-		  <div class="media-body">
-		    <h4 class="media-heading"> {{ $comment->user->name }}</h4>
-		    <h3>{{ $comment->rating->score }}</h3>
-		    <h3>{{ $comment->body }}</h3>
-		    <div>
-		    	@foreach($comment->likes as $like)
-		    		<span>{{ $like->user->name }}</span>
-		    	@endforeach
-		    </div>
-		    	<form action="/rating/comment" method="POST">
-		    		{{ csrf_field() }}
-		    		<input type="hidden" name="comment_id" value="{{ $comment->id }}" />
-		    		@include('shared.comment-form')
-		    	</form>
-		    </div>
-		  </div>
+		@include('shared.ratings-mini',['comment' => $comment, 'is_user_page' => $is_user_page, 'is_rating' => true])
+		<div class="container-fluid">
+			@foreach($comment->child_comments as $child_comment)
+				<div class="row">
+					<div class="col-md-1"></div>
+					<div class="col-md-11">
+						@include('shared.ratings-mini',['comment' => $child_comment, 'is_user_page' => false, 'is_rating' => false])
+					</div>
+				</div>
+			@endforeach
 		</div>
 	@endforeach

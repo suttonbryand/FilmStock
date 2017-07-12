@@ -13,7 +13,7 @@ class Comment extends Model
 
     	$comment->body = $attributes->body;
 
-    	$comment->parent_comment_id = $attributes->parent_comment_id;
+    	$comment->parent_comment_id = $attributes->comment_id;
 
     	$comment->rating_id = $attributes->rating_id;
 
@@ -45,6 +45,10 @@ class Comment extends Model
     public function likes(){
         return $this->hasMany(\FilmStock\Like::class);
     } 
+
+    public function child_comments(){
+        return $this->hasMany(\FilmStock\Comment::class,'parent_comment_id','id');
+    }
 
     private function addEpisodeAttributes($attributes){
             $this->season_number = $attributes->season_number;
