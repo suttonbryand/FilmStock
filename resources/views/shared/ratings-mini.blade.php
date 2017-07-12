@@ -1,7 +1,8 @@
 		<div class="media">
 		  <div class="media-left">
 		    <a href="#">
-		      <img class="media-object" src=" {{ $is_user_page ? $comment->movie->poster_path_small : $comment->user->makeGravatarLink() }}" alt="...">
+		      <img class="media-object" src=" {{ $is_user_page ? $comment->movie()->poster_path_small : $comment->user->makeGravatarLink() }}" alt="...">
+		    	
 		    </a>
 		  </div>
 		  <div class="media-body">

@@ -51,20 +51,7 @@ class UsersController extends Controller
         $user->gravatar_link = $user->makeGravatarLink();
         $ratings = $user->rating_comments;
         $client = new Client();
-        foreach($ratings as $rating){
-            switch($rating['media_type']){
-                case \FilmStock\Movie::URL_TV:
-                    $rating['movie'] = \FilmStock\Tv::find($rating['movie_id']);
-                    break;
-                case \FilmStock\Movie::URL_MOVIE:
-                    $rating['movie'] = \FilmStock\Movie::find($rating['movie_id']);
-                    break;
-                case \FilmStock\Movie::URL_EPISODE;
-                    $rating['movie'] = \FilmStock\Episode::findEpisode($rating['tv_id'],$rating['season_number'],$rating['episode_number']);
-                    break;
-            }
-        }
-        return view('users.show',['user' => $user, 'rating_comments' => $rating_comments]);
+        return view('users.show',['user' => $user, 'rating_comments' => $ratings]);
     }
 
     /**

@@ -39,8 +39,8 @@ class RatingsController extends Controller
 
     public function store_tv(Request $request){
         $this->validation($request);
+        $request->media_type = \FilmStock\Movie::URL_TV;
         $rating = \FilmStock\Rating::create($request);
-        $rating->media_type = \FilmStock\Movie::URL_TV;
         return redirect('/tv/' . $request->movie_id);        
     }
 
