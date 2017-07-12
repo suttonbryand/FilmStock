@@ -21,8 +21,12 @@ class Movie extends Model
     const URL_MOVIE = "movie";
     const URL_EPISODE = "episode";
     
-    public function ratings(){
-    	return Rating::where('movie_id','=',$this->id)->orderBy('created_at','desc')->get();
+    public function rating_comments(){
+         return \FilmStock\Comment::where('movie_id','=',$this->id)->whereNotNull('rating_id')->get();
+    }
+
+    public function comments(){
+        return \FilmStock\Comment::where('movie_id','=',$this->id)->get();
     }
 
     public static function find($id){

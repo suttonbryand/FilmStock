@@ -49,7 +49,7 @@ class UsersController extends Controller
     {
         $user = \FilmStock\User::find($id);
         $user->gravatar_link = $user->makeGravatarLink();
-        $ratings = $user->ratings;
+        $ratings = $user->rating_comments;
         $client = new Client();
         foreach($ratings as $rating){
             switch($rating['media_type']){
@@ -64,7 +64,7 @@ class UsersController extends Controller
                     break;
             }
         }
-        return view('users.show',['user' => $user, 'ratings' => $ratings]);
+        return view('users.show',['user' => $user, 'rating_comments' => $rating_comments]);
     }
 
     /**

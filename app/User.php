@@ -27,8 +27,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function ratings(){
-        return $this->hasMany(Rating::class)->orderBy('created_at','desc');
+    public function rating_comments(){
+        return $this->hasMany(\FilmStock\Comment::class)->whereNotNull('rating_id')->orderBy('created_at','desc');
     }
 
     public function friends(){

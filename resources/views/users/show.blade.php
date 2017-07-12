@@ -11,6 +11,6 @@
   </div>
 </div>
 
-@include('shared.ratings', ['ratings' => $ratings, 'is_user_page' => true]);
+@include('shared.ratings', ['ratings' => $rating_comments, 'is_user_page' => true]);
 
 @endsection

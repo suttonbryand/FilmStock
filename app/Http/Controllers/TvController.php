@@ -48,7 +48,7 @@ class TvController extends MoviesController
         $tv = \FilmStock\Tv::find($id);
         $number_of_seasons = $tv->number_of_seasons;
         $season = \FilmStock\Episode::getSeason($id,$number_of_seasons);
-        return view('tv.show', ['movie' => $tv, 'season' => $season, 'ratings' => $tv->ratings()]);
+        return view('tv.show', ['movie' => $tv, 'season' => $season, 'rating_comments' => $tv->rating_comments()]);
     }
 
     /**

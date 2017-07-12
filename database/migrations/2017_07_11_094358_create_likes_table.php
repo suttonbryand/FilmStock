@@ -18,10 +18,11 @@ class CreateLikesTable extends Migration
             $table->timestamps();
 
             $table->integer('user_id')->unsigned();
-            $table->integer('rating_id')->unsigned()->nullable();
-            $table->integer('comment_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->unique(['user_id','rating_id']);
+            $table->integer('comment_id')->unsigned();
+            $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');
+
             $table->unique(['user_id','comment_id']);
         });
     }

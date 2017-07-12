@@ -49,7 +49,7 @@ class MoviesController extends Controller
     public function show($id)
     {
         $movie = \FilmStock\Movie::find($id);
-        return view('movies.show', ['movie' => $movie, 'ratings' => $movie->ratings()]);
+        return view('movies.show', ['movie' => $movie, 'rating_comments' => $movie->rating_comments()]);
     }
 
     /**
